@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "831217532452",
+    "project_id": "pancentalphafinal",
+    "storage_bucket": "pancentalphafinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831217532452:android:e2390a85ccdc4e8fdba2b1",
+        "android_client_info": {
+          "package_name": "com.example.pancentalpha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv-5Sam8sX6NZy5QdiewNdpDzmLEUpA-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
