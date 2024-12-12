@@ -104,4 +104,6 @@ public class GpsLoc extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

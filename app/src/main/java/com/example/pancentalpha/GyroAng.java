@@ -3,6 +3,8 @@ package com.example.pancentalpha;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -12,11 +14,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class GyroAng extends AppCompatActivity {
+    SensorFusionHelper sFang;
+    TextView angTv;
+    float[] pos1 = new float[3], pos2 = new float[3],pos3 = new float[3], postemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gyro_ang);
+
+        angTv = findViewById(R.id.angTv);
     }
 
     @Override
@@ -35,5 +42,31 @@ public class GyroAng extends AppCompatActivity {
         else if(temp.equals("decimeter")) startActivity(new Intent(this, Decimet.class));
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void frloc(View view) {
+        sFang = new SensorFusionHelper(this);
+        sFang.start();
+        postemp = sFang.getCurrentPosition();
+        pos1[0] = postemp[0];
+        pos1[1] = postemp[1];
+        pos1[2] = postemp[2];
+    }
+
+    public void secLoc(View view) {
+        postemp = sFang.getCurrentPosition();
+        pos2[0] = postemp[0];
+        pos2[1] = postemp[1];
+        pos2[2] = postemp[2];
+    }
+
+    public void thiLoc(View view) {
+        postemp = sFang.getCurrentPosition();
+        pos3[0] = postemp[0];
+        pos3[1] = postemp[1];
+        pos3[2] = postemp[2];
+        angTv.setText("angle: "+sFang.angleBetweenCoordinates(pos1,pos2,pos3));
+        sFang.stop();
+
     }
 }

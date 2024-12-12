@@ -3,16 +3,28 @@ package com.example.pancentalpha;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Decimet extends AppCompatActivity {
+    private static Decimet ins;
+    TextView dBtv;
+    LiveDbMeter liveDbMeter;
+    EditText freqet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decimet);
+
+        ins = this;
+        dBtv = findViewById(R.id.dBtv);
+        liveDbMeter = new LiveDbMeter(this);
+        freqet = findViewById(R.id.freqet);
     }
 
     @Override
@@ -33,4 +45,21 @@ public class Decimet extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void startrec(View view) {
+        liveDbMeter.start(Double.parseDouble(freqet.getText().toString()));
+    }
+    public static Decimet getInstance() {return ins;}
+
+    public void updateDB(double db) {
+        Decimet.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                dBtv.setText(String.valueOf(db)+" dB");
+            }
+        });
+    }
+
+    public void stoprec(View view) {
+        liveDbMeter.stop();
+    }
 }
